@@ -3,7 +3,6 @@ package entidades;
 
 public class Ferramenta {
     private static int ultimoId = 1;
-
     private int id;
     private String nome;
     private String descricao;
@@ -16,6 +15,7 @@ public class Ferramenta {
         setDescricao(descricao);
         setStatus(status);
         this.tipoObjeto = tipoObjeto;
+
     }
 
     public int getId() {
@@ -60,15 +60,22 @@ public class Ferramenta {
 
     @Override
     public String toString() {
-        return "Ferramenta [" +
-                "ID: " + id +
-                ", Nome: " + nome +
-                ", Descrição: " + descricao +
-                ", Status: " + status +
-                ", Tipo: " + tipoObjeto.getNome() +
-                "]";
+        return "ID: " + id + "\n" +
+                "Nome: " + nome + "\n" +
+                "Descrição: " + descricao + "\n" +
+                "Status: " + status + "\n" +
+                "Tipo: " + tipoObjeto.getNome() + "\n\n";
     }
 
+    public void setInativo(){
+        this.status = "Inativo";
+    }
+    public void setEmprestado(){
+        this.status = "Emprestado";
+    }
+    public void setAtivo() {
+        this.status = "ATIVO";
+    }
 
     public boolean isEmprestavel() {
         return status.equalsIgnoreCase("ativo");

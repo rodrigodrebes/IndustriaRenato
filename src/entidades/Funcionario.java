@@ -37,10 +37,8 @@ public class Funcionario {
 
     @Override
     public String toString() {
-        return "Funcionario{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", setor='" + setor + '\'' +
-                '}';
+        return "ID: " + id + "\n" +
+                "Nome: " + nome + "\n" +
+                "Setor: " + setor + "\n\n";
     }
 }

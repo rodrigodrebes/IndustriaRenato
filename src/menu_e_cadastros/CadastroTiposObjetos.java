@@ -11,6 +11,7 @@ public class CadastroTiposObjetos {
 
     public CadastroTiposObjetos() {
         this.tiposObjetos = new ArrayList<>();
+
     }
 
     public void cadastrarTipoObjeto() {

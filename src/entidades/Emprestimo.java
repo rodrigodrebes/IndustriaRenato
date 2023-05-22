@@ -1,15 +1,17 @@
 package entidades;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Emprestimo {
     private int id;
     private Funcionario funcionario;
+    private String status; // "emprestado" ou "devolvido"
     private Ferramenta ferramenta;
-    private Date dataEmprestimo;
-    private Date dataDevolucao;
+    private LocalDate dataEmprestimo;
+    private LocalDate dataDevolucao;
 
-    public Emprestimo(int id, Funcionario funcionario, Ferramenta ferramenta, Date dataEmprestimo, Date dataDevolucao) {
+    public Emprestimo(int id, Funcionario funcionario, Ferramenta ferramenta, LocalDate dataEmprestimo, LocalDate dataDevolucao) {
         this.id = id;
         this.funcionario = funcionario;
         this.ferramenta = ferramenta;
@@ -41,19 +43,44 @@ public class Emprestimo {
         this.ferramenta = ferramenta;
     }
 
-    public Date getDataEmprestimo() {
+    public LocalDate getDataEmprestimo() {
         return dataEmprestimo;
     }
 
-    public void setDataEmprestimo(Date dataEmprestimo) {
+    public void setDataEmprestimo(LocalDate dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
     }
 
-    public Date getDataDevolucao() {
+    public LocalDate getDataDevolucao() {
         return dataDevolucao;
     }
 
-    public void setDataDevolucao(Date dataDevolucao) {
+    public void setDataDevolucao(LocalDate dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return "\n------------------------" +
+                "\nID do Empréstimo: " + id +
+                "\nFuncionário: " + funcionario.getNome() +
+                "\nFerramenta: " + ferramenta.getNome() +
+                "\nData do Empréstimo: " + dataEmprestimo.format(formatter) +
+                "\nData da Devolução: " + (dataDevolucao == null ? "Não devolvido" : dataDevolucao.format(formatter)) +
+                "\nStatus: " + (status == null ? "Não definido" : status) +
+                "\n------------------------";
+    }
+
+
+
 }
+
+

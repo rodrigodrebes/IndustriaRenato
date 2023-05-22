@@ -31,6 +31,8 @@ public class CadastroManutencoes {
         String dataInicioStr = scanner.nextLine();
         LocalDate dataInicio = LocalDate.parse(dataInicioStr);
 
+        objeto.setInativo();
+
         Manutencao manutencao = new Manutencao(objeto, dataInicio, descricao);
         manutencoes.add(manutencao);
         System.out.println("Manutenção cadastrada com sucesso!");
@@ -45,10 +47,14 @@ public class CadastroManutencoes {
         int manutencaoIndex = scanner.nextInt() - 1;
         Manutencao manutencao = manutencoes.get(manutencaoIndex);
 
+        manutencao.getFerramenta().setAtivo();
+
         scanner.nextLine(); // Consumir a linha restante
         System.out.println("Digite a data de término da manutenção (formato: AAAA-MM-DD):");
         String dataTerminoStr = scanner.nextLine();
         LocalDate dataTermino = LocalDate.parse(dataTerminoStr);
+
+        manutencao.getFerramenta().setAtivo();
 
         manutencao.setDataTermino(dataTermino);
         System.out.println("Manutenção encerrada com sucesso!");

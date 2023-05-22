@@ -33,4 +33,8 @@ public class CadastroFuncionarios {
             System.out.println(funcionario.toString());
         }
     }
+
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
 }
