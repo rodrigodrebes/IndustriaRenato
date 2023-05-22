@@ -22,30 +22,41 @@ public class CadastroEmprestimos {
         System.out.println("Digite o id do funcionario:");
         int idFuncionario = scanner.nextInt();
         Funcionario funcionario = null;
-        for(Funcionario f : funcionarios){
-            if(f.getId() == idFuncionario){
+        for (Funcionario f : funcionarios) {
+            if (f.getId() == idFuncionario) {
                 funcionario = f;
                 break;
             }
         }
-        if(funcionario == null){
+        if (funcionario == null) {
             System.out.println("Funcionário não encontrado");
             return;
         }
 
-        System.out.println("Digite o id da ferramenta:");
-        int idFerramenta = scanner.nextInt();
-        Ferramenta ferramenta = null;
-        for(Ferramenta f : ferramentas){
-            if(f.getId() == idFerramenta && f.isEmprestavel()){
-                ferramenta = f;
-                break;
+        System.out.println("Ferramentas disponíveis para empréstimo:");
+        List<Ferramenta> ferramentasDisponiveis = new ArrayList<>();
+        int opcao = 1;
+        for (Ferramenta f : ferramentas) {
+            if (f.isEmprestavel()) {
+                ferramentasDisponiveis.add(f);
+                System.out.println(opcao + ". " + f.getNome());
+                opcao++;
             }
         }
-        if(ferramenta == null || ferramenta.isEmprestavel() == false){
-            System.out.println("Ferramenta não encontrada ou não disponível para empréstimo");
+
+        if (ferramentasDisponiveis.isEmpty()) {
+            System.out.println("Não há ferramentas disponíveis para empréstimo");
             return;
         }
+
+        System.out.print("Digite o número correspondente à ferramenta ou objeto desejado: ");
+        int escolhaFerramenta = scanner.nextInt();
+        if (escolhaFerramenta < 1 || escolhaFerramenta > ferramentasDisponiveis.size()) {
+            System.out.println("Opção inválida");
+            return;
+        }
+
+        Ferramenta ferramenta = ferramentasDisponiveis.get(escolhaFerramenta - 1);
 
         LocalDate dataAtual = LocalDate.now();
 
@@ -58,6 +69,7 @@ public class CadastroEmprestimos {
 
         System.out.println("Empréstimo cadastrado com sucesso!");
     }
+
 
     public void listarEmprestimos() {
         System.out.println("\nLista de Empréstimos:");
@@ -89,6 +101,11 @@ public class CadastroEmprestimos {
         }
         if(emprestimo == null){
             System.out.println("Empréstimo não encontrado");
+            return;
+        }
+
+        if (emprestimo.getStatus().equalsIgnoreCase("Devolvido ao setor")) {
+            System.out.println("O Empréstimo já foi devolvido");
             return;
         }
 

@@ -31,7 +31,7 @@ public class CadastroManutencoes {
         String dataInicioStr = scanner.nextLine();
         LocalDate dataInicio = LocalDate.parse(dataInicioStr);
 
-        objeto.setInativo();
+        objeto.setEmManutencao();
 
         Manutencao manutencao = new Manutencao(objeto, dataInicio, descricao);
         manutencoes.add(manutencao);

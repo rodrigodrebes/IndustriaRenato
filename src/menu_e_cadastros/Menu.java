@@ -98,7 +98,6 @@ public class Menu {
             System.out.println("3. Cadastrar objeto");
             System.out.println("4. Listar objetos");
             System.out.println("5. Listar objetos por situação");
-            System.out.println("6. Listar objetos por tipo");
             System.out.println("0. Voltar");
             System.out.print("Digite a opção desejada: ");
             opcao = scanner.nextInt();
@@ -117,11 +116,7 @@ public class Menu {
                     cadastroObjetos.listarObjetos();
                     break;
                 case 5:
-                    System.out.print("Digite a situação do objeto (Emprestado/Disponível/Baixado/Em Manutenção): ");
-
-                    break;
-                case 6:
-
+                    cadastroObjetos.listarObjetosPorSituacao();
                     break;
                 case 0:
                     System.out.println("Voltando...");

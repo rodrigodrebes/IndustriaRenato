@@ -67,16 +67,15 @@ public class Ferramenta {
                 "Tipo: " + tipoObjeto.getNome() + "\n\n";
     }
 
-    public void setInativo(){
-        this.status = "Inativo";
+    public void setEmManutencao(){
+        this.status = "Em Manutenção";
     }
     public void setEmprestado(){
         this.status = "Emprestado";
     }
     public void setAtivo() {
-        this.status = "ATIVO";
+        this.status = "Ativo";
     }
-
     public boolean isEmprestavel() {
         return status.equalsIgnoreCase("ativo");
     }

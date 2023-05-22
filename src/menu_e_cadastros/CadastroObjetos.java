@@ -3,10 +3,7 @@ package menu_e_cadastros;
 import entidades.Ferramenta;
 import entidades.TipoObjeto;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class CadastroObjetos {
     private List<Ferramenta> ferramentas;
@@ -50,43 +47,41 @@ public class CadastroObjetos {
         }
     }
 
-    public void listarFerramentasPorSituacao() {
-        List<Ferramenta> ferramentasAtivas = new ArrayList<>();
-        List<Ferramenta> ferramentasBaixadas = new ArrayList<>();
+        public void listarObjetosPorSituacao() {
+            List<Ferramenta> emprestados = new ArrayList<>();
+            List<Ferramenta> disponiveis = new ArrayList<>();
+            List<Ferramenta> emManutencao = new ArrayList<>();
 
-        for (Ferramenta ferramenta : ferramentas) {
-            if (ferramenta.getStatus().equalsIgnoreCase("BAIXADO")) {
-                ferramentasBaixadas.add(ferramenta);
-            } else if (ferramenta.getStatus().equalsIgnoreCase("ATIVO")) {
-                ferramentasAtivas.add(ferramenta);
+            for (Ferramenta ferramenta : ferramentas) {
+                String status = ferramenta.getStatus();
+                if (status.equalsIgnoreCase("Emprestado")) {
+                    emprestados.add(ferramenta);
+                } else if (status.equalsIgnoreCase("Ativo")) {
+                    disponiveis.add(ferramenta);
+                } else if (status.equalsIgnoreCase("Em Manutenção")) {
+                    emManutencao.add(ferramenta);
+                }
+            }
+
+            // Ordenar alfabeticamente
+            Collections.sort(emprestados, Comparator.comparing(Ferramenta::getNome));
+            Collections.sort(disponiveis, Comparator.comparing(Ferramenta::getNome));
+            Collections.sort(emManutencao, Comparator.comparing(Ferramenta::getNome));
+
+            System.out.println("Itens emprestados:");
+            for (Ferramenta ferramenta : emprestados) {
+                System.out.println(ferramenta.getNome() + " - " + ferramenta.getStatus());
+            }
+
+            System.out.println("\nItens disponíveis:");
+            for (Ferramenta ferramenta : disponiveis) {
+                System.out.println(ferramenta.getNome() + " - " + ferramenta.getStatus());
+            }
+
+            System.out.println("\nItens em manutenção:");
+            for (Ferramenta ferramenta : emManutencao) {
+                System.out.println(ferramenta.getNome() + " - " + ferramenta.getStatus());
             }
         }
 
-        System.out.println("=== Ferramentas Ativas ===");
-        ferramentasAtivas.sort(Comparator.comparing(Ferramenta::getNome));
-        for (Ferramenta ferramenta : ferramentasAtivas) {
-            System.out.println("Nome: " + ferramenta.getNome() + ", Status: " + ferramenta.getStatus());
-        }
-
-        System.out.println("=== Ferramentas Baixadas ===");
-        ferramentasBaixadas.sort(Comparator.comparing(Ferramenta::getNome));
-        for (Ferramenta ferramenta : ferramentasBaixadas) {
-            System.out.println("Nome: " + ferramenta.getNome() + ", Status: " + ferramenta.getStatus());
-        }
-    }
-
-    public void listarFerramentasPorTipo(String tipo) {
-        List<Ferramenta> ferramentasDoTipo = new ArrayList<>();
-
-        for (Ferramenta ferramenta : ferramentas) {
-            if (ferramenta.getTipoObjeto().getNome().equals(tipo)) {
-                ferramentasDoTipo.add(ferramenta);
-            }
-        }
-
-        ferramentasDoTipo.sort(Comparator.comparing(Ferramenta::getNome));
-        for (Ferramenta ferramenta : ferramentasDoTipo) {
-            System.out.println("Nome: " + ferramenta.getNome() + ", Status: " + ferramenta.getStatus());
-        }
-    }
 }
